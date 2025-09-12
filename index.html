@@ -1,46 +1,318 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>友学舎｜遊学舎</title>
-  <style>
-    body { font-family: "Hiragino Sans", sans-serif; margin:0; padding:0; line-height:1.6; }
-    header { background:#4caf50; color:white; padding:1rem; text-align:center; }
-    nav { background:#eee; padding:0.5rem; text-align:center; }
-    nav a { margin:0 1rem; text-decoration:none; color:#333; }
-    section { padding:2rem; }
-    footer { background:#333; color:#fff; text-align:center; padding:1rem; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>友学舎・希望社会復帰推進機構 - 学び直しは、今からでいい。</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Hiragino Sans", "Yu Gothic UI", "Meiryo UI", sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background-color: #f8faf8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ヘッダー */
+        header {
+            background: linear-gradient(135deg, #2d5016 0%, #4a7c59 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 300;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+            opacity: 0.9;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            font-weight: 300;
+            opacity: 0.95;
+            margin-bottom: 40px;
+        }
+
+        /* メインコンテンツ */
+        main {
+            padding: 80px 0;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .intro p {
+            font-size: 1.2rem;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 2;
+        }
+
+        /* 特徴セクション */
+        .features {
+            margin-bottom: 80px;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            color: #2d5016;
+            margin-bottom: 60px;
+            font-weight: 600;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(45, 80, 22, 0.08);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(45, 80, 22, 0.15);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #4a7c59, #66a36f);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 2rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            color: #2d5016;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* CTAセクション */
+        .cta {
+            background: #f0f4f0;
+            padding: 60px 0;
+            text-align: center;
+            border-radius: 20px;
+            margin-bottom: 80px;
+        }
+
+        .cta h2 {
+            font-size: 2rem;
+            color: #2d5016;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .cta p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: linear-gradient(135deg, #4a7c59, #66a36f);
+            color: white;
+            padding: 18px 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(45, 80, 22, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(45, 80, 22, 0.3);
+        }
+
+        /* フッター */
+        footer {
+            background: #2d5016;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .footer-content p {
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .feature-card {
+                padding: 30px 25px;
+            }
+
+            .intro p {
+                font-size: 1.1rem;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            header {
+                padding: 40px 0;
+            }
+
+            main {
+                padding: 60px 0;
+            }
+
+            .cta {
+                padding: 40px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .logo {
+                font-size: 1.1rem;
+            }
+
+            .btn-primary {
+                padding: 15px 35px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>友学舎 - 希望社会復帰推進機構</h1>
-    <p>学びと再出発を支える通信教育プラットフォーム</p>
-  </header>
-  <nav>
-    <a href="#about">私たちについて</a>
-    <a href="#courses">講座</a>
-    <a href="#contact">お問い合わせ</a>
-  </nav>
-  <section id="about">
-    <h2>私たちについて</h2>
-    <p>友学舎は、社会復帰を目指す方々に向けて、学習と成長の機会を提供する通信教育サービスです。</p>
-  </section>
-  <section id="courses">
-    <h2>講座一覧</h2>
-    <ul>
-      <li>中学・高校基礎学習コース</li>
-      <li>大学受験サポート</li>
-      <li>資格試験対策</li>
-    </ul>
-  </section>
-  <section id="contact">
-    <h2>お問い合わせ</h2>
-    <p>メール: info@example.com</p>
-  </section>
-  <footer>
-    <p>&copy; 2025 友学舎 / 希望社会復帰推進機構</p>
-  </footer>
+    <header>
+        <div class="container">
+            <div class="logo">友学舎・希望社会復帰推進機構</div>
+            <h1>学び直しは、今からでいい。</h1>
+            <p class="subtitle">社会復帰を支援する通信教育サービス</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="intro">
+                <p>
+                    新しいスタートを切りたい、そんなあなたの想いを私たちは応援します。<br>
+                    受刑者・元受刑者の方、そしてそのご家族や支援者の皆様へ。<br>
+                    通信教育を通じて、社会復帰への確実な一歩を共に歩みませんか。<br>
+                    一人ひとりのペースに合わせた学習プログラムで、未来への扉を開きます。
+                </p>
+            </section>
+
+            <section class="features">
+                <h2>3つの特徴</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">基</div>
+                        <h3>基礎学力の向上</h3>
+                        <p>読み書き・計算から始まり、高校卒業程度まで段階的に学習できます。個人のレベルに合わせたカリキュラムで、確実にステップアップしていきます。</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">資</div>
+                        <h3>資格取得対策</h3>
+                        <p>就職に有利な各種資格の取得をサポート。簿記、パソコン検定、介護初任者研修など、実用的な資格の学習プログラムを豊富に用意しています。</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">就</div>
+                        <h3>就労準備支援</h3>
+                        <p>履歴書の書き方、面接対策、ビジネスマナーなど、社会復帰に必要なスキルを総合的に身につけることができます。実践的な内容で自信をつけましょう。</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cta">
+                <h2>まずは資料請求から</h2>
+                <p>
+                    詳しい学習内容や料金については、無料の資料をご請求ください。<br>
+                    あなたの状況に合わせた最適な学習プランをご提案いたします。
+                </p>
+                <a href="#" class="btn-primary">お問い合わせは下から</a>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3>友学舎・希望社会復帰推進機構</h3>
+                <p>取得中</p>
+                <p>TEL: / </p>
+                <p>Email: </p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
