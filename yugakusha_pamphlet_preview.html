@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>友学舎 通信教育パンフレット プレビュー</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Yu Gothic', 'Hiragino Sans', sans-serif;
+            background: #f5f5f5;
+            padding: 40px 20px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .preview-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .preview-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #5F7F67;
+        }
+
+        .preview-note {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 14px;
+        }
+
+        .pamphlet-wrapper {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .page {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 40px 35px;
+            min-height: 750px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 20px;
+            right: 35px;
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* P1: 表紙 */
+        .cover {
+            background: linear-gradient(180deg, #f8faf9 0%, #ffffff 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cover-title {
+            font-size: 16px;
+            color: #5F7F67;
+            margin-top: 20px;
+            font-weight: normal;
+        }
+
+        .cover-catchcopy {
+            font-family: 'Yu Mincho', serif;
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
+            margin: 60px 0 40px 0;
+            line-height: 1.6;
+        }
+
+        .cover-icon {
+            width: 100px;
+            height: 100px;
+            margin: 20px 0;
+        }
+
+        .cover-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .cover-subcopy {
+            font-size: 15px;
+            color: #555;
+            margin: 30px 0;
+            line-height: 1.9;
+        }
+
+        .cover-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.9;
+            text-align: left;
+            padding: 0 20px;
+        }
+
+        .cover-org {
+            font-size: 13px;
+            color: #5F7F67;
+            margin-top: auto;
+            padding-top: 40px;
+        }
+
+        /* P2: 中面左 */
+        .page-header {
+            font-family: 'Yu Mincho', serif;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .page-subheader {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .section-divider {
+            border-top: 1px solid #e0e0e0;
+            margin: 25px 0;
+        }
+
+        .step-section {
+            margin-bottom: 30px;
+        }
+
+        .step-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .step-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #5F7F67;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .step-name {
+            font-family: 'Yu Mincho', serif;
+            font-size: 18px;
+            font-weight: bold;
+            color: #5F7F67;
+        }
+
+        .step-content {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.9;
+            margin-left: 0;
+            margin-top: 8px;
+        }
+
+        .step-list {
+            list-style: none;
+            margin-top: 10px;
+            padding-left: 0;
+        }
+
+        .step-list li {
+            margin-bottom: 8px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .step-list li:before {
+            content: "◆";
+            position: absolute;
+            left: 0;
+            color: #5F7F67;
+        }
+
+        .step-detail {
+            font-size: 12px;
+            color: #666;
+            margin-top: 3px;
+            padding-left: 10px;
+        }
+
+        .flow-diagram {
+            background: #f8faf9;
+            border: 1px solid #d0ddd5;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .flow-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #5F7F67;
+            margin-bottom: 15px;
+        }
+
+        .flow-steps {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            font-size: 12px;
+            color: #555;
+        }
+
+        .flow-step {
+            text-align: center;
+        }
+
+        .flow-arrow {
+            color: #5F7F67;
+            font-size: 20px;
+        }
+
+        .flow-note {
+            font-size: 11px;
+            color: #666;
+            margin-top: 12px;
+            line-height: 1.6;
+        }
+
+        /* P3: 中面右 */
+        .cd-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .cd-icon {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        .notice-box {
+            background: #fff9e6;
+            border: 1px solid #f0d885;
+            border-radius: 6px;
+            padding: 12px 15px;
+            margin: 20px 0;
+            font-size: 13px;
+            color: #666;
+            text-align: center;
+        }
+
+        .content-list {
+            margin: 20px 0;
+        }
+
+        .content-item {
+            margin-bottom: 20px;
+        }
+
+        .content-item-title {
+            font-weight: bold;
+            color: #5F7F67;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .content-item-desc {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .benefit-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #5F7F67;
+            margin: 25px 0 15px 0;
+            text-align: center;
+        }
+
+        .benefit-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .benefit-list li {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 8px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .benefit-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #5F7F67;
+            font-weight: bold;
+        }
+
+        .warning-box {
+            background: #fff9e6;
+            border: 2px solid #e8b86d;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 25px;
+        }
+
+        .warning-title {
+            font-weight: bold;
+            color: #e8b86d;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        .warning-text {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* P4: 裏表紙 */
+        .back-cover {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .application-steps {
+            margin: 25px 0;
+        }
+
+        .app-step {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .app-step-number {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #A8D5BA;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 12px;
+            flex-shrink: 0;
+            font-size: 16px;
+        }
+
+        .app-step-content {
+            flex: 1;
+        }
+
+        .app-step-title {
+            font-weight: bold;
+            color: #5F7F67;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .app-step-desc {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .contact-box {
+            background: #f8faf9;
+            border: 1px solid #d0ddd5;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+
+        .contact-title {
+            font-weight: bold;
+            color: #5F7F67;
+            margin-bottom: 12px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .contact-info {
+            font-size: 13px;
+            color: #555;
+            line-height: 2;
+        }
+
+        .message-box {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .message-title {
+            font-family: 'Yu Mincho', serif;
+            font-size: 18px;
+            font-weight: bold;
+            color: #5F7F67;
+            margin-bottom: 15px;
+        }
+
+        .message-text {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.9;
+            text-align: left;
+        }
+
+        .bottom-icon {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .bottom-icon svg {
+            width: 50px;
+            height: 50px;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .preview-container {
+                box-shadow: none;
+                padding: 0;
+            }
+            .preview-title,
+            .preview-note {
+                display: none;
+            }
+            .pamphlet-wrapper {
+                gap: 0;
+            }
+            .page {
+                border: none;
+                box-shadow: none;
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="preview-container">
+        <h1 class="preview-title">友学舎・希望社会復帰推進機構</h1>
+        <p class="preview-note">受刑者向け通信教育パンフレット｜A4二つ折り（4ページ）プレビュー</p>
+
+        <div class="pamphlet-wrapper">
+            <!-- P1: 表紙 -->
+            <div class="page cover">
+                <div class="cover-title">受刑者向け通信教育パンフレット</div>
+                
+                <div class="cover-catchcopy">
+                    いまから、はじめよう。<br>
+                    ここから、つながろう。
+                </div>
+
+                <div class="cover-icon">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M50 20 Q35 35, 35 50 L35 80 M50 20 Q65 35, 65 50 L65 80 M50 20 L50 15 M35 80 Q35 85, 40 85 L60 85 Q65 85, 65 80" 
+                              stroke="#5F7F67" stroke-width="3" fill="none" stroke-linecap="round"/>
+                        <circle cx="50" cy="90" r="2" fill="#5F7F67"/>
+                        <circle cx="45" cy="88" r="1.5" fill="#5F7F67"/>
+                        <circle cx="55" cy="88" r="1.5" fill="#5F7F67"/>
+                    </svg>
+                </div>
+
+                <div class="cover-subcopy">
+                    読み書き・計算から資格取得まで。<br>
+                    あなたの「これから」を支える通信教育。
+                </div>
+
+                <div class="cover-description">
+                    友学舎・希望社会復帰推進機構では、刑務所や拘置所で学べる通信教育を提供しています。<br><br>
+                    基礎学力の学び直しから、就職に役立つ資格まで。一人ひとりのペースに合わせた学習プログラムで、社会復帰への準備をサポートします。
+                </div>
+
+                <div class="cover-org">友学舎・希望社会復帰推進機構</div>
+                <div class="page-number">P1</div>
+            </div>
+
+            <!-- P2: 中面左 -->
+            <div class="page">
+                <h2 class="page-header">学べることは、大きく3つ。</h2>
+                <p class="page-subheader">あなたの「いま」と「これから」に合わせて選べます。</p>
+
+                <div class="section-divider"></div>
+
+                <div class="step-section">
+                    <div class="step-title">
+                        <div class="step-icon">基</div>
+                        <div class="step-name">基礎学力の向上</div>
+                    </div>
+                    <div class="step-content">
+                        小学校・中学校レベルの国語・算数・数学を、基礎からていねいに学び直せます。<br><br>
+                        「文字を読むのが苦手」「計算に自信がない」<br>
+                        そんな方でも安心して始められる教材です。<br><br>
+                        ・ひらがな、カタカナ、漢字<br>
+                        ・たし算、ひき算、かけ算、わり算<br>
+                        ・文章問題、作文の書き方
+                    </div>
+                </div>
+
+                <div class="step-section">
+                    <div class="step-title">
+                        <div class="step-icon">資</div>
+                        <div class="step-name">資格取得対策</div>
+                    </div>
+                    <div class="step-content">
+                        就職に役立つ資格の勉強ができます。
+                        <ul class="step-list">
+                            <li>
+                                <strong>簿記検定（3級）</strong>
+                                <div class="step-detail">お金の計算や帳簿のつけ方を学びます。事務職や経理の仕事に役立ちます。</div>
+                            </li>
+                            <li>
+                                <strong>パソコン検定</strong>
+                                <div class="step-detail">ワード、エクセルの基本操作を学びます。多くの仕事で必要とされるスキルです。</div>
+                            </li>
+                            <li>
+                                <strong>介護初任者研修（準備コース）</strong>
+                                <div class="step-detail">高齢者介護の基礎知識を学びます。出所後、介護業界への就職を目指せます。</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-section">
+                    <div class="step-title">
+                        <div class="step-icon">就</div>
+                        <div class="step-name">就労準備支援</div>
+                    </div>
+                    <div class="step-content">
+                        履歴書の書き方、面接対策、ビジネスマナーなど、社会復帰に必要なスキルを総合的に身につけることができます。実践的な内容で自信をつけましょう。
+                    </div>
+                </div>
+
+                <div class="flow-diagram">
+                    <div class="flow-title">あなたの学びの道すじ</div>
+                    <div class="flow-steps">
+                        <div class="flow-step">基礎学力</div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">資格取得</div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">就労準備</div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">社会復帰</div>
+                    </div>
+                    <div class="flow-note">
+                        どこからでも始められます。途中で内容を変えることもできます。<br>自分のペースで進められます。
+                    </div>
+                </div>
+
+                <div class="page-number">P2</div>
+            </div>
+
+            <!-- P3: 中面右 -->
+            <div class="page">
+                <div class="cd-header">
+                    <div class="cd-icon">
+                        <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="25" cy="25" r="20" stroke="#5F7F67" stroke-width="2" fill="none"/>
+                            <circle cx="25" cy="25" r="3" fill="#5F7F67"/>
+                            <path d="M15 10 Q10 15, 10 20" stroke="#5F7F67" stroke-width="1.5" fill="none"/>
+                            <path d="M35 10 Q40 15, 40 20" stroke="#5F7F67" stroke-width="1.5" fill="none"/>
+                        </svg>
+                    </div>
+                    <h2 class="page-header" style="margin-bottom: 0;">耳で学ぶ、CD教材もあります。</h2>
+                </div>
+
+                <div class="notice-box">
+                    ※ 施設の許可があれば、CD教材を使った学習も可能です。
+                </div>
+
+                <p class="step-content">
+                    文字を読むのが苦手な方、目が疲れやすい方でも、音声で学べる教材をご用意しています。CDプレーヤーで聞くだけで、学習を進められます。
+                </p>
+
+                <div class="section-divider"></div>
+
+                <h3 style="font-size: 14px; font-weight: bold; color: #5F7F67; margin: 20px 0 15px 0;">CD教材で学べる内容</h3>
+
+                <div class="content-list">
+                    <div class="content-item">
+                        <div class="content-item-title">◆ 基礎的な読み書き</div>
+                        <div class="content-item-desc">発音から文字の形まで、音で覚えられます。</div>
+                    </div>
+
+                    <div class="content-item">
+                        <div class="content-item-title">◆ やさしい英会話</div>
+                        <div class="content-item-desc">日常会話や簡単なあいさつを学べます。</div>
+                    </div>
+
+                    <div class="content-item">
+                        <div class="content-item-title">◆ 朗読・読書</div>
+                        <div class="content-item-desc">名作文学や自己啓発の本を音声で楽しめます。</div>
+                    </div>
+
+                    <div class="content-item">
+                        <div class="content-item-title">◆ 心理教育</div>
+                        <div class="content-item-desc">感情のコントロール、ストレスとの付き合い方。自分を知り、整えるためのヒントが学べます。</div>
+                    </div>
+
+                    <div class="content-item">
+                        <div class="content-item-title">◆ ビジネスマナー</div>
+                        <div class="content-item-desc">職場での言葉づかい、電話対応、報告の仕方など。</div>
+                    </div>
+                </div>
+
+                <div class="benefit-title">音声学習のメリット</div>
+                <ul class="benefit-list">
+                    <li>目が疲れない</li>
+                    <li>繰り返し聞いて覚えられる</li>
+                    <li>自分のペースで学習できる</li>
+                    <li>文字が苦手でも学べる</li>
+                    <li>リラックスしながら学習できる</li>
+                </ul>
+
+                <div class="warning-box">
+                    <div class="warning-title">【重要】</div>
+                    <div class="warning-text">
+                        CD教材の利用には、施設ごとの規則により許可が必要です。<br><br>
+                        利用を希望される方は、事前に施設の担当者にご相談ください。すべての施設で利用できるとは限りませんので、あらかじめご了承ください。
+                    </div>
+                </div>
+
+                <div class="page-number">P3</div>
+            </div>
+
+            <!-- P4: 裏表紙 -->
+            <div class="page back-cover">
+                <h2 class="page-header" style="text-align: center;">まずは資料請求から。</h2>
+
+                <div class="section-divider"></div>
+
+                <div class="application-steps">
+                    <div class="app-step">
+                        <div class="app-step-number">1</div>
+                        <div class="app-step-content">
+                            <div class="app-step-title">施設の担当者に相談する</div>
+                            <div class="app-step-desc">
+                                通信教育を受けたいことを、施設の教育担当や処遇担当の職員にお伝えください。
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="app-step">
+                        <div class="app-step-number">2</div>
+                        <div class="app-step-content">
+                            <div class="app-step-title">資料を請求する</div>
+                            <div class="app-step-desc">
+                                下記の宛先に、「資料請求希望」と書いて手紙をお送りください。（本人が書けない場合は、施設職員を通じて請求することもできます）
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="app-step">
+                        <div class="app-step-number">3</div>
+                        <div class="app-step-content">
+                            <div class="app-step-title">教材が届く</div>
+                            <div class="app-step-desc">
+                                あなたに合った教材をお送りします。学習方法や進め方の説明書も同封されています。
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="app-step">
+                        <div class="app-step-number">4</div>
+                        <div class="app-step-content">
+                            <div class="app-step-title">学習スタート</div>
+                            <div class="app-step-desc">
+                                自分のペースで学習を始めてください。質問や相談もいつでも受け付けています。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-box">
+                    <div class="contact-title">問い合わせ先</div>
+                    <div class="contact-info">
+                        〒000-0000<br>
+                        ○○県○○市○○町0-0-0<br>
+                        友学舎・希望社会復帰推進機構<br>
+                        受刑者通信教育センター<br><br>
+                        TEL: 000-0000-0000<br>
+                        （平日 9:00〜17:00）<br><br>
+                        <span style="font-size: 12px;">※ 施設からの問い合わせも受け付けています。</span>
+                    </div>
+                </div>
+
+                <div class="message-box">
+                    <div class="message-title">学ぶことに、遅すぎることはありません。</div>
+                    <div class="message-text">
+                        「自分には無理」と思わないでください。わからないことがあれば、何度でも質問できます。<br><br>
+                        一歩ずつ、あなたのペースで。<br>
+                        私たちは、あなたの学びを応援します。
+                    </div>
+                </div>
+
+                <div class="bottom-icon">
+                    <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M25 10 Q20 17.5, 20 25 L20 40 M25 10 Q30 17.5, 30 25 L30 40 M25 10 L25 7 M20 40 Q20 42.5, 22.5 42.5 L27.5 42.5 Q30 42.5, 30 40" 
+                              stroke="#5F7F67" stroke-width="2" fill="none" stroke-linecap="round"/>
+                        <circle cx="25" cy="45" r="1" fill="#5F7F67"/>
+                        <circle cx="22.5" cy="44" r="0.75" fill="#5F7F67"/>
+                        <circle cx="27.5" cy="44" r="0.75" fill="#5F7F67"/>
+                    </svg>
+                </div>
+
+                <div class="page-number">P4</div>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px; padding: 20px; background: #f8faf9; border-radius: 6px; text-align: center;">
+            <p style="font-size: 13px; color: #666; line-height: 1.8;">
+                このプレビューは印刷用パンフレットのイメージです。<br>
+                実際の印刷では、A4用紙を二つ折りにして4ページ構成となります。<br>
+                <strong>左側2ページが内側、右側2ページが外側</strong>に配置されます。
+            </p>
+        </div>
+    </div>
+</body>
+</html>
